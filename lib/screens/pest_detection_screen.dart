@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:agri_ai_uganda/services/tensorflow_service.dart';
 import 'package:agri_ai_uganda/models/crop_disease.dart';
 import 'package:agri_ai_uganda/utils/constants.dart';
+import 'package:agri_ai_uganda/services/database_helper.dart';
 
 class PestDetectionScreen extends StatefulWidget {
   const PestDetectionScreen({super.key});
@@ -56,6 +57,15 @@ class _PestDetectionScreenState extends State<PestDetectionScreen> {
       if (!mounted) return;
 
       final disease = await _tfService.classifyImage(image.path);
+
+      if (disease != null) {
+        await DatabaseHelper().insertDetection({
+          'diseaseName': disease.name,
+          'confidence': disease.confidence,
+          'date': DateTime.now().toIso8601String(),
+          'imagePath': image.path,
+        });
+      }
 
       setState(() {
         _isScanning = false;
