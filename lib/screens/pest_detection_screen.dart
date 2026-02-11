@@ -5,6 +5,7 @@ import 'package:agri_ai_uganda/services/tensorflow_service.dart';
 import 'package:agri_ai_uganda/models/crop_disease.dart';
 import 'package:agri_ai_uganda/utils/constants.dart';
 import 'package:agri_ai_uganda/services/database_helper.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PestDetectionScreen extends StatefulWidget {
   const PestDetectionScreen({super.key});
@@ -123,16 +124,30 @@ class _PestDetectionScreenState extends State<PestDetectionScreen> {
             Text("Local Remedy (Luganda)", style: Theme.of(context).textTheme.titleLarge),
              Text(disease.localRemedy, style: const TextStyle(fontStyle: FontStyle.italic)),
              const SizedBox(height: 32),
-             SizedBox(
-               width: double.infinity,
-               child: ElevatedButton(
-                 onPressed: () => Navigator.pop(context),
-                 style: ElevatedButton.styleFrom(
-                   backgroundColor: AppColors.primaryGreen,
-                   padding: const EdgeInsets.symmetric(vertical: 16),
+             Row(
+               children: [
+                 Expanded(
+                   child: OutlinedButton.icon(
+                     onPressed: () {
+                        Share.share("I detected ${disease.name} using AgriAI Uganda! Treatment: ${disease.treatment}");
+                     },
+                     icon: const Icon(Icons.share),
+                     label: const Text("Share"),
+                     style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 16)),
+                   ),
                  ),
-                 child: const Text("Done", style: TextStyle(color: Colors.white, fontSize: 18)),
-               ),
+                 const SizedBox(width: 16),
+                 Expanded(
+                   child: ElevatedButton(
+                     onPressed: () => Navigator.pop(context),
+                     style: ElevatedButton.styleFrom(
+                       backgroundColor: AppColors.primaryGreen,
+                       padding: const EdgeInsets.symmetric(vertical: 16),
+                     ),
+                     child: const Text("Done", style: TextStyle(color: Colors.white, fontSize: 18)),
+                   ),
+                 ),
+               ],
              )
           ],
         ),
