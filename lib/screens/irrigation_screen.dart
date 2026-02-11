@@ -1,0 +1,13 @@
+import 'package:flutter/material.dart';
+
+class IrrigationScreen extends StatelessWidget {
+  const IrrigationScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Smart Irrigation')),
+      body: const Center(child: Text('Irrigation Plan Form Here')),
+    );
+  }
+}

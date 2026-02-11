@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:agri_ai_uganda/utils/constants.dart';
-// import 'package:agri_ai_uganda/screens/home_screen.dart'; // Will create later
+import 'package:agri_ai_uganda/screens/main_screen.dart';
 
 void main() {
   runApp(const AgriAIApp());
@@ -35,7 +35,7 @@ class AgriAIApp extends StatelessWidget {
         ),
       ),
       themeMode: ThemeMode.system,
-      home: const Scaffold(body: Center(child: Text("AgriAI Starting..."))), // Placeholder
+      home: const MainScreen(),
     );
   }
 }
