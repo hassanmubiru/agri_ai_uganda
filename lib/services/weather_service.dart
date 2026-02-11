@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
-// import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http;
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class WeatherService {
-  // Placeholder API Key - In production, use env variables
-  final String apiKey = "YOUR_OPENWEATHERMAP_API_KEY";
+  // API Key provided by user
+  final String apiKey = "c6a42b45fc61acb4187fab541418a0ed";
   final String baseUrl = "https://api.openweathermap.org/data/2.5/weather";
 
   Future<Position> _determinePosition() async {
@@ -34,35 +34,25 @@ class WeatherService {
 
   Future<Map<String, dynamic>> getLocalWeather() async {
     try {
-      // Position position = await _determinePosition();
-      await _determinePosition(); // Request permission, but ignore result for mock
+      Position position = await _determinePosition();
       
-      // MOCK RESPONSE for demo purposes (to avoid invalid API key error)
-      // In real app:
-      /*
-      final response = await http.get(Uri.parse(
-          '$baseUrl?lat=${position.latitude}&lon=${position.longitude}&appid=$apiKey&units=metric'));
+      final url = '$baseUrl?lat=${position.latitude}&lon=${position.longitude}&appid=$apiKey&units=metric';
+      print("Fetching weather from: $url");
+
+      final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
         return json.decode(response.body);
+      } else {
+        throw Exception('Failed to load weather: ${response.statusCode}');
       }
-      */
-      
-      // Simulate network delay
-      await Future.delayed(const Duration(seconds: 1));
-      
-      return {
-        "name": "Kampala",
-        "main": {"temp": 26.5, "humidity": 60},
-        "weather": [{"description": "scattered clouds", "icon": "03d"}]
-      };
     } catch (e) {
       print("Weather Error: $e");
-      // Return fallback data
+      // Return fallback data only on error
       return {
-        "name": "Local Area",
-        "main": {"temp": 25.0, "humidity": 50},
-        "weather": [{"description": "clear sky", "icon": "01d"}]
+        "name": "Error",
+        "main": {"temp": 0.0, "humidity": 0},
+        "weather": [{"description": "unknown", "icon": "01d"}]
       };
     }
   }
