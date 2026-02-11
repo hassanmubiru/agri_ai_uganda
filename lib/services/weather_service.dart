@@ -34,7 +34,8 @@ class WeatherService {
 
   Future<Map<String, dynamic>> getLocalWeather() async {
     try {
-      Position position = await _determinePosition();
+      // Position position = await _determinePosition();
+      await _determinePosition(); // Request permission, but ignore result for mock
       
       // MOCK RESPONSE for demo purposes (to avoid invalid API key error)
       // In real app:
