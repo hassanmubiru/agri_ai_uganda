@@ -1,0 +1,15 @@
+Healthy
+Cassava Mosaic Disease
+Maize Streak Virus
+Banana Wilt
+Coffee Berry Disease
+Bean Rust
+Early Blight
+Late Blight
+Leaf Miner
+Aphids
+Armyworm
+Mealybugs
+Root Rot
+Scale Insects
+Whiteflies

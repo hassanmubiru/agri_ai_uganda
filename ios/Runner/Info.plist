@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>AgriAI needs camera access to detect crop pests.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>AgriAI needs photo library access to pick leaf images.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>AgriAI needs location to provide local weather and irrigation advice.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
